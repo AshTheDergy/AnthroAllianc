@@ -1,0 +1,11 @@
+# Ignore .env
+settings/.env
+
+# Ignore VSCode
+.vscode/*
+
+# Ignore Node Modules
+node_modules/*
+
+# Ignore Database values
+Database/data/*

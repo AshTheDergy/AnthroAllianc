@@ -1,0 +1,18 @@
+{
+    "name": "anthroalliance",
+    "version": "0.1",
+    "description": "ptsd",
+    "main": "index.js",
+    "scripts": {
+        "start": "npm run node && node index.js"
+    },
+    "author": "Ash",
+    "dependencies": {
+        "@joshdb/core": "^1.2.7",
+        "@joshdb/json": "^1.0.5",
+        "axios": "^1.6.5",
+        "discord.js": "^14.11.0",
+        "dotenv": "^16.3.1",
+        "util": "^0.12.5"
+    }
+}
