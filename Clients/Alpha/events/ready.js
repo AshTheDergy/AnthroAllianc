@@ -2,7 +2,8 @@ const { ActivityType } = require("discord.js");
 const { alpha } = require('../../../index')
 
 alpha.client.on("ready", async () => {
-    console.log(`${alpha.client.user.username} Is Applicating around!`);
+    const alphaReady = alpha.client.clientName;
+    module.exports = { alphaReady };
     alpha.client.user.setActivity({
         name: `with Place Applications`,
         type: ActivityType.Playing,

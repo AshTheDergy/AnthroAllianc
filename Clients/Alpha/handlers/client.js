@@ -28,6 +28,7 @@ class Alpha {
       events: new Collection(),
       clientName: "Alpha",
       cooldowns: new Collection(),
+      commands: new Collection(),
       commandCooldown: new Discord.Collection(),
     });
   }

@@ -6,7 +6,7 @@ module.exports = {
     name: "alpha",
     description: config.Strings.descriptions.Alpha,
     type: ApplicationCommandType.ChatInput,
-    cooldown: 2.5,
+    cooldown: 5,
     options: [
         {
             name: "test",

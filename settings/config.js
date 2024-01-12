@@ -7,6 +7,13 @@ module.exports = {
         Proton: process.env.PROTONTOKEN,
         Theta: process.env.THETATOKEN,
     },
+    activityStatus: {
+        Alpha: 'PlaceHolder',
+        Mu: 'PlaceHolder',
+        Phi: 'PlaceHolder',
+        Proton: 'PlaceHolder',
+        Theta: 'PlaceHolder',
+    },
     Strings: {
         descriptions: {
             Alpha: "PlaceHolder",
@@ -15,5 +22,14 @@ module.exports = {
             Proton: "PlaceHolder",
             Theta: "PlaceHolder",
         },
+        PhiCanvas: {
+            mainPage: {
+                
+            },
+        },
+        error: {
+            command_not_found: "`%s` Command Not Found",
+        },
+        cooldown: "You are On Cooldown, wait `%s` Seconds",
     },
 }

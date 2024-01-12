@@ -1,6 +1,9 @@
 # Ignore .env
 settings/.env
 
+# Ignore files
+settings/files/*
+
 # Ignore VSCode
 .vscode/*
 
@@ -9,3 +12,5 @@ node_modules/*
 
 # Ignore Database values
 Database/data/*
+
+test.js

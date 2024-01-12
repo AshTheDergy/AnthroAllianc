@@ -3,7 +3,8 @@ const Mu = require("./Clients/Mu/handlers/client");
 const Phi = require("./Clients/Phi/handlers/client");
 const Proton = require("./Clients/Proton/handlers/client");
 const Theta = require("./Clients/Theta/handlers/client");
-const settings = require("./settings/config");
+
+const { startClients } = require('./start')
 
 const alpha = new Alpha();
 const mu = new Mu();
@@ -13,11 +14,7 @@ const theta = new Theta();
 
 module.exports = { alpha, mu, phi, proton, theta };
 
-alpha.start(settings.Tokens.Alpha);
-mu.start(settings.Tokens.Mu);
-phi.start(settings.Tokens.Phi);
-proton.start(settings.Tokens.Proton);
-theta.start(settings.Tokens.Theta);
+startClients(alpha, mu, phi, proton, theta)
 
 process.on("unhandledRejection", (r, p) => {
    console.log(" [Error_Handling] :: Unhandled Rejection/Catch");

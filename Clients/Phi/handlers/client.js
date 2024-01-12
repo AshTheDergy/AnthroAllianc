@@ -27,6 +27,7 @@ class Phi {
     Object.assign(this.client, {
       clientName: "Phi",
       cooldowns: new Collection(),
+      commands: new Collection(),
       commandCooldown: new Discord.Collection(),
     });
   }

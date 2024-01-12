@@ -9,7 +9,9 @@ module.exports = async (client) => {
     //Loading Command files
     try {
         const command = require(`../command/mainCommand`);
-        console.log(`Main command loaded :: ${client.clientName}`)
+        //console.log(`Main command loaded :: ${client.clientName}`)
+        const muOnline = 'Mu';
+        module.exports = { muOnline };
         client.on("ready", async () => {
             await client.application.commands.set([command]);
         });

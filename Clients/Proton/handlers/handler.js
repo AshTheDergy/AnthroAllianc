@@ -9,7 +9,8 @@ module.exports = async (client) => {
     //Loading Command files
     try {
         const command = require(`../command/mainCommand`);
-        console.log(`Main command loaded :: ${client.clientName}`)
+        const protonOnline = client.clientName
+        module.exports = { protonOnline };
         client.on("ready", async () => {
             await client.application.commands.set([command]);
         });

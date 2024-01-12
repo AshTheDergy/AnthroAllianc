@@ -9,26 +9,15 @@ module.exports = async (client) => {
     //Loading Command files
     try {
         const command = require(`../command/mainCommand`);
-        console.log(`Main command loaded :: ${client.clientName}`)
+        //console.log(`Main command loaded :: ${client.clientName}`)
+        const alphaOnline = 'Alpha';
+        module.exports = { alphaOnline };
+        client.commands.set(command.name, command);
         client.on("ready", async () => {
             await client.application.commands.set([command]);
         });
     } catch (e) {
         console.log(e);
-    }
-
-    //Loading Functions
-    try {
-        let functCount = 0;
-        readdirSync(`./Clients/${client.clientName}/command/functions`)
-        .filter((f) => f.endsWith(".js"))
-        .forEach((funct) => {
-            require(`../command/functions/${funct}`)
-            eventCount++
-        });
-        functCount == 0 ? void(0) : console.log(`${client.clientName} :: ${functCount} Functions Loaded`)
-    } catch (e) {
-        console.log(e)
     }
 
     //Loading Event files

@@ -9,7 +9,8 @@ module.exports = async (client) => {
     //Loading Command files
     try {
         const command = require(`../command/mainCommand`);
-        console.log(`Main command loaded :: ${client.clientName}`)
+        const thetaOnline = client.clientName;
+        module.exports = { thetaOnline };
         client.on("ready", async () => {
             await client.application.commands.set([command]);
         });

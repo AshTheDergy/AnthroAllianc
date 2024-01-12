@@ -2,8 +2,8 @@ const util = require('util');
 const { cooldown } = require('../command/functions/commonFunctions');
 const { ApplicationCommandOptionType } = require("discord.js");
 const { Strings } = require('../../../settings/config');
-const { alpha } = require("../../../index");
-const client = alpha.client;
+const { phi } = require("../../../index");
+const client = phi.client;
 
 client.on("interactionCreate", async (interaction) => {
     if (interaction.isCommand()) {
