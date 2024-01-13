@@ -22,14 +22,14 @@ module.exports = {
             Proton: "PlaceHolder",
             Theta: "PlaceHolder",
         },
-        PhiCanvas: {
-            mainPage: {
-                
-            },
-        },
         error: {
             command_not_found: "`%s` Command Not Found",
         },
         cooldown: "You are On Cooldown, wait `%s` Seconds",
+    },
+    canvas: {
+        Phi: {
+            backgroundColor: "#add8e6",
+        },
     },
 }

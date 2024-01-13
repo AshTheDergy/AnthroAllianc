@@ -1,14 +1,15 @@
 const Canvas = require('canvas');
 const { AttachmentBuilder } = require("discord.js")
+const config = require("../../../../settings/config");
 
-function canvasMainPage() {
+async function canvasMainPage() {
 
     // Canvas Settings
     const canvasWidth = 500;
     const canvasHeight = 300;
     const cornerRadius = 7.5;
     const outlineWidth = 7.5;
-    const backgroundColor = '#add8e6';
+    const backgroundColor = config.canvas.Phi.backgroundColor;
 
     //Canvas Basics
     const canvas = Canvas.createCanvas(canvasWidth, canvasHeight);
@@ -34,7 +35,6 @@ function canvasMainPage() {
     outlineCtx.stroke();
 
     // Line seperator
-
     outlineCtx.beginPath();
     outlineCtx.moveTo(30, 110);
     outlineCtx.lineTo(canvasWidth - 30, 110);

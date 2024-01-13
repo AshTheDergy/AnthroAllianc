@@ -13,4 +13,5 @@ node_modules/*
 # Ignore Database values
 Database/data/*
 
+# Ignore test file
 test.js

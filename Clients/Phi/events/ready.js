@@ -7,5 +7,7 @@ phi.client.on("ready", async () => {
     phi.client.user.setActivity({
         name: `with Place Teams and Projects`,
         type: ActivityType.Playing,
-    })
+    });
+
+    //await require("../../../Database/dbHandler")(phi)
 })

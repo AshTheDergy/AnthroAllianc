@@ -1,4 +1,4 @@
-// Typedef
+/*
 /**
  * @typedef {import('../Clients/Alpha/handlers/client')} Alpha
  * @typedef {import('../Clients/Mu/handlers/client')} Mu
@@ -20,6 +20,20 @@ const provider = require("@joshdb/json");
 
 module.exports = async (alpha, mu, phi, proton, theta) => {
 
-    
+    phi.client.interaction_db = new Josh({
+        name: "interaction_db",
+        provider: provider,
+        providerOptions: {
+            dataDir: "./Database/data/interaction"
+        }
+    })
+
+    phi.client.project = new Josh({
+        name: "project",
+        provider: provider,
+        providerOptions: {
+            dataDir: "./Database/data/project"
+        }
+    })
 
 }

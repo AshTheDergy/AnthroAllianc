@@ -1,17 +1,18 @@
 const settings = require("./settings/config");
 
-function startClients(alpha, mu, phi, proton, theta) {
+async function startClients(alpha, mu, phi, proton, theta) {
     
-    //Starting Clients
+    // Starting Clients
 
-    alpha.start(settings.Tokens.Alpha);
-    mu.start(settings.Tokens.Mu);
-    phi.start(settings.Tokens.Phi);
-    proton.start(settings.Tokens.Proton);
-    theta.start(settings.Tokens.Theta);
+    await alpha.start(settings.Tokens.Alpha);
+    await mu.start(settings.Tokens.Mu);
+    await phi.start(settings.Tokens.Phi);
+    await proton.start(settings.Tokens.Proton);
+    await theta.start(settings.Tokens.Theta);
 
-    //Console stuff
+    // Console stuff
 
+    // Commands
     const { alphaOnline } = require('./Clients/Alpha/handlers/handler');
     const { muOnline } = require('./Clients/Mu/handlers/handler');
     const { phiOnline } = require('./Clients/Phi/handlers/handler');
@@ -20,23 +21,30 @@ function startClients(alpha, mu, phi, proton, theta) {
     let clientsOnline = [alphaOnline, muOnline, phiOnline, protonOnline, thetaOnline];
 
     const loadedCommands = clientsOnline.map(c => (c == undefined ? `X ${c}` : `O ${c}`));
-    console.log(`Commands Loaded - | ${loadedCommands.join(' | ')} |`);
+    console.log(`Loading Commands - | ${loadedCommands.join(' | ')} |`);
 
-    setTimeout(function () {
+    // Clients
+    await new Promise((resolve) => {
+        setTimeout(resolve, 1800);
+    });
 
-        const { alphaReady } = require('./Clients/Alpha/events/ready');
-        const { muReady } = require('./Clients/Mu/events/ready');
-        const { phiReady } = require('./Clients/Phi/events/ready');
-        const { protonReady } = require('./Clients/Proton/events/ready');
-        const { thetaReady } = require('./Clients/Theta/events/ready');
+    const { alphaReady } = require('./Clients/Alpha/events/ready');
+    const { muReady } = require('./Clients/Mu/events/ready');
+    const { phiReady } = require('./Clients/Phi/events/ready');
+    const { protonReady } = require('./Clients/Proton/events/ready');
+    const { thetaReady } = require('./Clients/Theta/events/ready');
 
-        let onlineClients = [alphaReady, muReady, phiReady, protonReady, thetaReady];
+    let onlineClients = [alphaReady, muReady, phiReady, protonReady, thetaReady];
+    const online = onlineClients.map(c => (c == undefined ? `X ${c}` : `O ${c}`));
+    console.log(`Clients Online -   | ${online.join(' | ')} |`);
 
-        const online = onlineClients.map(c => (c == undefined ? `X ${c}` : `O ${c}`));
-        console.log(`Clients online -  | ${online.join(' | ')} |`);
-        console.log("Every Event was Successful");
+    // Database
+    await require('./Database/dbHandler')(alpha, mu, phi, proton, theta)
+    console.log(`Database Online`);
 
-    }, 1500);
+    // Final
+    console.log("Everything is Set Up!");
+
 }
 
 module.exports = { startClients };
