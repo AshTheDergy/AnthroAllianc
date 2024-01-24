@@ -2,6 +2,7 @@ require("dotenv").config({ path: './settings/.env' });
 module.exports = {
     Tokens: {
         Alpha: process.env.ALPHATOKEN,
+        Lambda: process.env.LAMBDATOKEN,
         Mu: process.env.MUTOKEN,
         Phi: process.env.PHITOKEN,
         Proton: process.env.PROTONTOKEN,
@@ -9,6 +10,7 @@ module.exports = {
     },
     activityStatus: {
         Alpha: 'PlaceHolder',
+        Lambda: 'PlaceHolder',
         Mu: 'PlaceHolder',
         Phi: 'PlaceHolder',
         Proton: 'PlaceHolder',
@@ -17,6 +19,7 @@ module.exports = {
     Strings: {
         descriptions: {
             Alpha: "PlaceHolder",
+            Lambda: "PlaceHolder",
             Mu: "PlaceHolder",
             Phi: "PlaceHolder",
             Proton: "PlaceHolder",
@@ -29,7 +32,7 @@ module.exports = {
     },
     canvas: {
         Phi: {
-            backgroundColor: "#add8e6",
+            backgroundColor: "#b4c7dc",
         },
     },
 }

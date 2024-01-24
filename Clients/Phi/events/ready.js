@@ -5,7 +5,7 @@ phi.client.on("ready", async () => {
     const phiReady = phi.client.clientName;
     module.exports = { phiReady };
     phi.client.user.setActivity({
-        name: `with Place Teams and Projects`,
+        name: `with Place Projects`,
         type: ActivityType.Playing,
     });
 
