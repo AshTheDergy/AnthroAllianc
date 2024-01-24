@@ -1,5 +1,5 @@
 const util = require('util');
-const { cooldown } = require('../command/functions/commonFunctions');
+const { cooldown } = require('../handlers/commonFunctions');
 const { ApplicationCommandOptionType } = require("discord.js");
 const { Strings } = require('../../../settings/config');
 const { phi } = require("../../../index");

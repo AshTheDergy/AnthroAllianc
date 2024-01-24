@@ -1,9 +1,7 @@
-const { CommandInteraction, ApplicationCommandType } = require("discord.js");
+const { CommandInteraction, ApplicationCommandType, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const Phi = require('../handlers/client');
-const config = require("../../../settings/config");
-const { canvasMainPage } = require('./functions/canvas');
-const { buttonsMainPage } = require('./functions/buttons');
-const { swapMainPage } = require('./functions/pageSwap')
+const pages = require('./pages');
+const config = require('../../../settings/config');
 
 module.exports = {
     name: "phi",
@@ -28,20 +26,37 @@ module.exports = {
             return;
         }
 
+        //page history
+        let pageStack = ['main'];
+
         // Create mainPage
-        var pageName = 'Main'
-        var Attachment = await canvasMainPage();
-        var rows = await buttonsMainPage();
-        
+        let currentPage = pages.main;
+        var content = await currentPage.getContent(interaction);
+        var rows = [currentPage.buttons];
+
+        const navigationRow = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setCustomId('back')
+                    .setLabel('Back')
+                    .setStyle(ButtonStyle.Secondary)
+                    .setDisabled(true),
+                new ButtonBuilder()
+                    .setCustomId('close')
+                    .setLabel('Close')
+                    .setStyle(ButtonStyle.Danger)
+            );
+
+        rows.push(navigationRow);
+
         let message = await interaction.reply({
-            files: [Attachment],
+            ...content,
             components: rows,
             ephemeral: false,
         });
 
         await client.interaction_db.set(author);
 
-        // Page changing
         let filter = (i) => i.user.id === author;
         let collector = message.createMessageComponentCollector({
             filter: filter,
@@ -49,29 +64,40 @@ module.exports = {
         });
 
         collector.on("collect", async (i) => {
-            if (i.member != author) {
-                i.reply({ content: `You aren't the message author.`, ephemeral: true });
+            console.log(i)
+            if (i.user.id !== author) {
+                console.log("tr")
+                await i.followUp({ content: `You aren't the message author.`, ephemeral: true });
                 return;
-            } else if (i.customId == 'close') {
-                collector.stop();
-                await client.interaction_db.delete(author);
-                return;
-            }
+            } else if (i.isButton()) {
+                if (i.customId === 'back') {
+                    pageStack.pop();
+                    if (pageStack.length === 0) {
+                        return;
+                    }
+                    const previousPageName = pageStack[pageStack.length - 1];
+                    currentPage = pages[previousPageName];
+                } else if (i.customId === 'close') {
+                    collector.stop();
+                    return;
+                } else {
+                    const pageName = i.customId;
+                    if (pages[pageName]) {
+                        currentPage = pages[pageName];
+                        pageStack.push(pageName);
+                    } else {
+                        interaction.followUp({ content: "there was an unexpected error", ephemeral: true })
+                    }
+                }
 
-            switch(pageName) {
-                case 'Main':
-                    swapMainPage(client, interaction, i, currentPage)
-                ;
-                case 'Tutorial':
-                    ;
-                case 'Project':
-                    ;
-                case 'Team':
-                    ;
-                case 'Clusters':
-                ;
+                content = await currentPage.getContent();
+                rows = currentPage.buttons();
+
+                navigationRow.components[0].setDisabled(pageStack.length <= 1);
+                rows.push(navigationRow);
+
+                await i.update({ ...content, components: rows });
             }
-            
         });
 
         collector.on("end", async () => {

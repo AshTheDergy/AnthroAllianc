@@ -1,8 +1,7 @@
-const { ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const [butSuc, butDan, butPri, butSec, butLink] = [ButtonStyle.Success, ButtonStyle.Danger, ButtonStyle.Primary, ButtonStyle.Secondary, ButtonStyle.Link]
 
-async function buttonsMainPage() {
-
+exports.buttonsMain = () => {
     //Buttons
     const readTutorial = new ButtonBuilder()
     .setCustomId('tut')
@@ -24,11 +23,6 @@ async function buttonsMainPage() {
     .setLabel("Clusters")
     .setStyle(butSuc);
 
-    const close = new ButtonBuilder()
-    .setCustomId("close")
-    .setLabel("Close")
-    .setStyle(butDan);
-
     //Rows
     const row1 = new ActionRowBuilder()
     .addComponents(
@@ -38,14 +32,5 @@ async function buttonsMainPage() {
         manageClusters
     );
 
-    const row2 = new ActionRowBuilder()
-    .addComponents(
-        close
-    )
-
-    return [row1, row2];
-}
-
-module.exports = {
-    buttonsMainPage,
-}
+    return row1;
+};

@@ -1,8 +1,8 @@
-const Canvas = require('canvas');
-const { AttachmentBuilder } = require("discord.js")
+const { createCanvas } = require('canvas');
 const config = require("../../../../settings/config");
+const { AttachmentBuilder } = require('discord.js')
 
-async function canvasMainPage() {
+exports.canvasMain = async (interaction) => {
 
     // Canvas Settings
     const canvasWidth = 500;
@@ -12,13 +12,13 @@ async function canvasMainPage() {
     const backgroundColor = config.canvas.Phi.backgroundColor;
 
     //Canvas Basics
-    const canvas = Canvas.createCanvas(canvasWidth, canvasHeight);
+    const canvas = createCanvas(canvasWidth, canvasHeight);
     const backgroundCtx = canvas.getContext('2d');
     backgroundCtx.fillStyle = backgroundColor
     backgroundCtx.fillRect(5, 5, canvasWidth - 10, canvasHeight - 10);
 
     // Canvas Outline
-    const outlineCanvas = Canvas.createCanvas(canvasWidth, canvasHeight);
+    const outlineCanvas = createCanvas(canvasWidth, canvasHeight);
     const outlineCtx = outlineCanvas.getContext('2d');
     outlineCtx.lineJoin = 'round';
     outlineCtx.lineWidth = outlineWidth;
@@ -57,10 +57,6 @@ async function canvasMainPage() {
     // Load Canvas
     backgroundCtx.drawImage(outlineCanvas, 0, 0);
 
-    const Attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'mainPage.png' });
-    return Attachment;
-}
-
-module.exports = {
-    canvasMainPage,
-}
+    const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'mainPage.png' });
+    return attachment;
+};

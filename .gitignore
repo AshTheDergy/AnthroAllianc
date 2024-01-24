@@ -15,3 +15,6 @@ Database/data/*
 
 # Ignore test file
 test.js
+
+# Ignore temp files
+temp_functions/*
