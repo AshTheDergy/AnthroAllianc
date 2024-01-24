@@ -6,11 +6,11 @@ async function startClients(alpha, mu, phi, proton, theta) {
 
     // Starting Clients
 
-    //await alpha.start(settings.Tokens.Alpha);
-    //await mu.start(settings.Tokens.Mu);
+    await alpha.start(settings.Tokens.Alpha);
+    await mu.start(settings.Tokens.Mu);
     await phi.start(settings.Tokens.Phi);
-    //await proton.start(settings.Tokens.Proton);
-    //await theta.start(settings.Tokens.Theta);
+    await proton.start(settings.Tokens.Proton);
+    await theta.start(settings.Tokens.Theta);
 
     // Console stuff
 
