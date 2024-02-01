@@ -5,7 +5,6 @@ exports.startClients = async (alpha, lambda, mu, phi, proton, theta) => {
     const clientNames = ['Alpha', 'Lambda', 'Mu', 'Phi', 'Proton', 'Theta'];
 
     // Starting Clients
-
     await alpha.start(settings.Tokens.Alpha);
     await lambda.start(settings.Tokens.Lambda);
     await mu.start(settings.Tokens.Mu);
