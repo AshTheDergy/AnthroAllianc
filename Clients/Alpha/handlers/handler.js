@@ -9,7 +9,6 @@ module.exports = async (client) => {
     //Loading Command files
     try {
         const command = require(`../command/mainCommand`);
-        //console.log(`Main command loaded :: ${client.clientName}`)
         const alphaOnline = 'Alpha';
         module.exports = { alphaOnline };
         client.commands.set(command.name, command);

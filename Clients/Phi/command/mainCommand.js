@@ -15,7 +15,7 @@ module.exports = {
      */
 
     run: async (client, interaction) => {
-
+        
         // Variables
         const author = interaction.user.id;
 
@@ -60,11 +60,10 @@ module.exports = {
         let filter = (i) => i.user.id === author;
         let collector = message.createMessageComponentCollector({
             filter: filter,
-            time: 300000,
+            time: 120000,
         });
 
         collector.on("collect", async (i) => {
-            console.log(i)
             if (i.user.id !== author) {
                 console.log("tr")
                 await i.followUp({ content: `You aren't the message author.`, ephemeral: true });
@@ -80,13 +79,15 @@ module.exports = {
                 } else if (i.customId === 'close') {
                     collector.stop();
                     return;
+                } else if (i.customId.startsWith("modal")) {
+
                 } else {
                     const pageName = i.customId;
                     if (pages[pageName]) {
                         currentPage = pages[pageName];
                         pageStack.push(pageName);
                     } else {
-                        interaction.followUp({ content: "there was an unexpected error", ephemeral: true })
+                        interaction.followUp({ content: "there was an unexpected error", ephemeral: true });
                     }
                 }
 

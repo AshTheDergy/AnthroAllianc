@@ -16,9 +16,17 @@ module.exports = async (alpha, lambda, mu, phi, proton, theta) => {
         name: "interaction_db",
         provider: provider,
         providerOptions: {
-            dataDir: "./Database/data/interaction"
+            dataDir: "./Database/data/interaction/phi"
         }
-    })
+    });
+
+    lambda.client.interaction_db = new Josh({
+        name: "interaction_db",
+        provider: provider,
+        providerOptions: {
+            dataDir: "./Database/data/interaction/lambda"
+        }
+    });
 
     phi.client.project = new Josh({
         name: "project",
@@ -26,6 +34,6 @@ module.exports = async (alpha, lambda, mu, phi, proton, theta) => {
         providerOptions: {
             dataDir: "./Database/data/project"
         }
-    })
+    });
 
 }

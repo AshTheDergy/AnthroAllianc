@@ -1,10 +1,8 @@
 const { Client, Collection, GatewayIntentBits, Partials } = require("discord.js");
-const Discord = require('discord.js');
-const fs = require("fs");
 
 class Lambda {
   constructor() {
-    this.client = new Discord.Client({
+    this.client = new Client({
       partials: [
         Partials.Channel,
         Partials.Message,
@@ -27,7 +25,8 @@ class Lambda {
     Object.assign(this.client, {
       clientName: "Lambda",
       cooldowns: new Collection(),
-      commandCooldown: new Discord.Collection(),
+      commands: new Collection(),
+      commandCooldown: new Collection(),
     });
   }
 

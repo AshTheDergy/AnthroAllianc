@@ -1,19 +1,14 @@
 const settings = require("./settings/config");
 
-async function startClients(alpha, lambda, mu, phi, proton, theta) {
+exports.startClients = async (alpha, lambda, mu, phi, proton, theta) => {
     
     const clientNames = ['Alpha', 'Lambda', 'Mu', 'Phi', 'Proton', 'Theta'];
 
     // Starting Clients
 
-<<<<<<< HEAD
-    //await alpha.start(settings.Tokens.Alpha);
-    //await lambda.start(settings.Tokens.Lambda);
-    //await mu.start(settings.Tokens.Mu);
-=======
     await alpha.start(settings.Tokens.Alpha);
+    await lambda.start(settings.Tokens.Lambda);
     await mu.start(settings.Tokens.Mu);
->>>>>>> e57f53cb877a2d3b07fa2706312dc4bf69b71caf
     await phi.start(settings.Tokens.Phi);
     await proton.start(settings.Tokens.Proton);
     await theta.start(settings.Tokens.Theta);
@@ -62,7 +57,7 @@ async function startClients(alpha, lambda, mu, phi, proton, theta) {
         }
     }
 
-    console.log(`Loading Commands - | ${clientCommandStatus.join(' | ')} |`);
+    console.log(`Clients online   - | ${clientOnlineStatus.join(' | ')} |`);
 
     // Database
     await require('./Database/dbHandler')(alpha, lambda, mu, phi, proton, theta)
@@ -76,5 +71,3 @@ async function startClients(alpha, lambda, mu, phi, proton, theta) {
     console.log("Everything is Set Up!");
 
 }
-
-module.exports = { startClients };
