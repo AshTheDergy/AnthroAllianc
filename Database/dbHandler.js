@@ -12,6 +12,8 @@ const provider = require("@joshdb/json");
 
 module.exports = async (alpha, lambda, mu, phi, proton, theta) => {
 
+
+    // interactions
     phi.client.interaction_db = new Josh({
         name: "interaction_db",
         provider: provider,
@@ -27,6 +29,8 @@ module.exports = async (alpha, lambda, mu, phi, proton, theta) => {
             dataDir: "./Database/data/interaction/lambda"
         }
     });
+
+    // Other
 
     phi.client.project = new Josh({
         name: "project",

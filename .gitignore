@@ -18,3 +18,5 @@ test.js
 
 # Ignore temp files
 temp_functions/*
+
+other/*

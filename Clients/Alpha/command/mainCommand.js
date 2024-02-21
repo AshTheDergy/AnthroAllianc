@@ -21,7 +21,6 @@ module.exports = {
      */
 
     run : async (client, interaction) => {
-        const strings = interaction.options.getString("test");
-        interaction.reply(strings + " yay")
+        
     },
 };

@@ -27,7 +27,9 @@ module.exports = {
         },
         error: {
             command_not_found: "`%s` Command Not Found",
+            canvas_interaction: "placeHolder",
         },
+        place_tips: ['tip1', 'tip2', 'tip3'],
         cooldown: "You are On Cooldown, wait `%s` Seconds",
     },
     canvas: {

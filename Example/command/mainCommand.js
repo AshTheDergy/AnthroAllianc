@@ -1,11 +1,11 @@
 const { CommandInteraction, ApplicationCommandType, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const Phi = require('../handlers/client');
+const clientName = require('../handlers/client');
 const pages = require('./pages');
 const config = require('../../../settings/config');
 
 module.exports = {
-    name: "phi",
-    description: config.Strings.descriptions.Phi,
+    name: "clientName",
+    description: config.Strings.descriptions.clientName,
     type: ApplicationCommandType.ChatInput,
     cooldown: 5,
     options: [
@@ -14,11 +14,11 @@ module.exports = {
             description: "Select if the Canvas should be only visible to you or not (default false)",
             type: 5,
             required: false,
-        }
-    ],
+        } 
+    ], // Remove if you use deferReply in interactionCreate.js
 
     /**
-     * @param {Phi} client
+     * @param {clientName} client
      * @param {CommandInteraction} interaction
      */
 
@@ -26,18 +26,17 @@ module.exports = {
 
         //Check if there is an active canvas. note: might not work as expected when the canvas is ephemeral/private (only visible to author)
         const author = interaction.user.id;
-        const private = interaction.options.getInteger("private")
         if (await client.interaction_db.has(author)) {
-            interaction.reply({ content: `You already have an active Phi`, ephemeral: true });
+            interaction.reply({ content: `You already have an activecanvas`, ephemeral: true });
             return;
-        }
+        } 
 
         //Variables
-        const project = await client.project.get(`${interaction.user.id}`) || false;
-        let pageStack = ['pageMain']; //Main page name (dont change :3)
-        let currentPage = pages.pageMain; //This has to match the name in pageMain.js
-        var content = await currentPage.getContent(client, interaction, project); //Get the canvas for main page
-        var rows = await currentPage.buttons(client, interaction, project); //First 1-4 button rows
+        const private = interaction.options.getInteger("private"); //disable if you disable the option
+        let pageStack = ['pageExample']; //Main page name (dont change :3)
+        let currentPage = pages.pageExample; //Has to match page
+        var content = await currentPage.getContent(client, interaction); //Get the canvas for main page
+        var rows = await currentPage.buttons(client, interaction); //First 1-4 button rows
         const navigationRow = new ActionRowBuilder() //The back and close buttons
             .addComponents(
                 new ButtonBuilder()
@@ -59,12 +58,12 @@ module.exports = {
             ephemeral: private ? true : false,
         });
 
-        await client.interaction_db.set(author);
+        await client.interaction_db.set(author); //Delete if the  28:9 (cordinates) thing breaks
 
         let filter = (i) => i.user.id === author;
         let collector = message.createMessageComponentCollector({
             filter: filter,
-            time: 180000,
+            time: 1000 * 180 /*seconds*/, //You can adjust the time
         });
 
         collector.on("collect", async (i) => {
@@ -90,10 +89,10 @@ module.exports = {
                         await modal.showModal(i);
                     } else {
                         console.error(`Modal with ID ${modalId} not found.`);
-                        interaction.followUp({ content: "there was an unexpected error", ephemeral: true });
+                        interaction.followUp({ content: `there was an unexpected error\nModal with ID ${modalId} not found.`, ephemeral: true });
                     }
                     return;
-                } else {
+                } else if (i.customId.startsWith("page")) {
                     const pageName = i.customId;
                     if (pages[pageName]) {
                         currentPage = pages[pageName];
@@ -101,6 +100,9 @@ module.exports = {
                     } else {
                         interaction.followUp({ content: "there was an unexpected error", ephemeral: true });
                     }
+                } else if (i.customId.startsWith("interaction")) {
+                    //Being worked on
+                    console.log("yes yes wait daddy >w<")
                 }
 
                 content = await currentPage.getContent();
