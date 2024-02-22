@@ -1,8 +1,8 @@
-# r/Place Bot by Ash-Derg Products for AnthroAlliance
+# r/Place Bots manager by Ash-Derg Products for AnthroAlliance
 
 ## Description
 
-This bot is designed for the r/place Reddit event, brought to you by Ash-Derg Products. It aims to enhance user interaction and participation in the event by providing a suite of smart features. Our goal is to create a more engaging and manageable experience for users participating in r/place, allowing for creativity and community collaboration to flourish.
+This bot manager is designed for the r/place Reddit event, brought to you by Ash-Derg Products. It aims to enhance user interaction and participation in the event by providing a suite of smart features. Our goal is to create a more engaging and manageable experience for users participating in r/place, allowing for creativity and community collaboration to flourish.
 
 ## Smart Features
 
