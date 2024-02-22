@@ -3,14 +3,14 @@ const settings = require("./settings/config");
 exports.startClients = async (alpha, lambda, mu, phi, proton, theta) => {
     
     const clientNames = ['Alpha', 'Lambda', 'Mu', 'Phi', 'Proton', 'Theta'];
-
-    // Starting Clients
-    //await alpha.start(settings.Tokens.Alpha);
-    //await lambda.start(settings.Tokens.Lambda);
-    //await mu.start(settings.Tokens.Mu);
+    
+    // Starting Clients (add // before await for bots you dont want to be online at the moment)
+    await alpha.start(settings.Tokens.Alpha);
+    await lambda.start(settings.Tokens.Lambda);
+    await mu.start(settings.Tokens.Mu);
     await phi.start(settings.Tokens.Phi);
-    //await proton.start(settings.Tokens.Proton);
-    //await theta.start(settings.Tokens.Theta);
+    await proton.start(settings.Tokens.Proton);
+    await theta.start(settings.Tokens.Theta);
 
     // Console stuff
 
